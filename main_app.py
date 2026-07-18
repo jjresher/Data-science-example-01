@@ -483,7 +483,7 @@ def render_charts(df: pd.DataFrame):
     fig_ts.update_layout(**PLOT_LAYOUT, height=380,
                          xaxis=dict(gridcolor="#21262d"),
                          yaxis=dict(gridcolor="#21262d"))
-    st.plotly_chart(fig_ts, use_container_width=True)
+    st.plotly_chart(fig_ts, width="stretch")
 
     # ── 4.2 Pirámide de edad por género ────────────────────────────────
     col1, col2 = st.columns(2)
@@ -515,7 +515,7 @@ def render_charts(df: pd.DataFrame):
             yaxis=dict(gridcolor="#21262d"),
             bargap=0.1,
         )
-        st.plotly_chart(fig_pir, use_container_width=True)
+        st.plotly_chart(fig_pir, width="stretch")
 
     with col2:
         st.markdown("#### Distribución de Desenlace por Variante")
@@ -535,7 +535,7 @@ def render_charts(df: pd.DataFrame):
             xaxis=dict(gridcolor="#21262d"),
             yaxis=dict(gridcolor="#21262d"),
         )
-        st.plotly_chart(fig_var, use_container_width=True)
+        st.plotly_chart(fig_var, width="stretch")
 
     # ── 4.3 Mapa de calor — Departamento × Variante ─────────────────────
     st.markdown("#### Mapa de Calor: Casos por Departamento y Variante")
@@ -559,7 +559,7 @@ def render_charts(df: pd.DataFrame):
         xaxis=dict(title="Variante", gridcolor="#21262d"),
         yaxis=dict(title="Departamento", gridcolor="#21262d"),
     )
-    st.plotly_chart(fig_heat, use_container_width=True)
+    st.plotly_chart(fig_heat, width="stretch")
 
     # ── 4.4 Box-plot edad por desenlace y Scatter edad vs días hosp ──────
     col3, col4 = st.columns(2)
@@ -576,7 +576,7 @@ def render_charts(df: pd.DataFrame):
             xaxis=dict(gridcolor="#21262d"),
             yaxis=dict(gridcolor="#21262d"),
         )
-        st.plotly_chart(fig_box, use_container_width=True)
+        st.plotly_chart(fig_box, width="stretch")
 
     with col4:
         st.markdown("#### Dispersión: Edad vs Días Hospitalizado")
@@ -587,7 +587,7 @@ def render_charts(df: pd.DataFrame):
             df_hosp, x="edad", y="dias_hospitalizado", color="desenlace",
             color_discrete_map=PALETTE,
             opacity=0.55,
-            trendline="lowess",
+            trendline="ols",
             labels={"edad": "Edad", "dias_hospitalizado": "Días Hospitalizado",
                     "desenlace": "Desenlace"},
         )
@@ -596,7 +596,7 @@ def render_charts(df: pd.DataFrame):
             xaxis=dict(gridcolor="#21262d"),
             yaxis=dict(gridcolor="#21262d"),
         )
-        st.plotly_chart(fig_scat, use_container_width=True)
+        st.plotly_chart(fig_scat, width="stretch")
 
     # ── 4.5 Treemap departamento / desenlace ────────────────────────────
     st.markdown("#### Treemap: Casos por Departamento y Desenlace")
@@ -614,7 +614,7 @@ def render_charts(df: pd.DataFrame):
     )
     fig_tree.update_layout(**PLOT_LAYOUT, height=420)
     fig_tree.update_traces(textfont=dict(color="#e6edf3"))
-    st.plotly_chart(fig_tree, use_container_width=True)
+    st.plotly_chart(fig_tree, width="stretch")
 
     # ── 4.6 Histograma + KDE edad ────────────────────────────────────────
     col5, col6 = st.columns(2)
@@ -630,7 +630,7 @@ def render_charts(df: pd.DataFrame):
             xaxis=dict(gridcolor="#21262d"),
             yaxis=dict(gridcolor="#21262d"),
         )
-        st.plotly_chart(fig_hist, use_container_width=True)
+        st.plotly_chart(fig_hist, width="stretch")
 
     with col6:
         st.markdown("#### Violín: Días Hospitalizado por Variante")
@@ -646,7 +646,7 @@ def render_charts(df: pd.DataFrame):
             xaxis=dict(gridcolor="#21262d"),
             yaxis=dict(gridcolor="#21262d"),
         )
-        st.plotly_chart(fig_viol, use_container_width=True)
+        st.plotly_chart(fig_viol, width="stretch")
 
     # ── 4.7 Sunburst resultado PCR → desenlace ──────────────────────────
     st.markdown("#### Sunburst: PCR → Desenlace")
@@ -663,7 +663,7 @@ def render_charts(df: pd.DataFrame):
         color_discrete_map=PALETTE,
     )
     fig_sun.update_layout(**PLOT_LAYOUT, height=460)
-    st.plotly_chart(fig_sun, use_container_width=True)
+    st.plotly_chart(fig_sun, width="stretch")
 
 
 # ─────────────────────────────────────────────
@@ -678,7 +678,7 @@ def render_raw_data(df: pd.DataFrame):
         ]
         st.dataframe(
             df[display_cols].head(500),
-            use_container_width=True,
+            width="stretch",
             height=400,
         )
     csv = df[[
